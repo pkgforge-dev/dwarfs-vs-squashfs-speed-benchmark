@@ -14,9 +14,8 @@ for artifact in ./*.AppImage; do
 
 	# squashfs
 	mksquashfs ./AppDir ./squashfs -comp zstd -Xcompression-level 22 -b 1M
-	cp -v "$squashfs_runtime" ./SQUASHFS.AppImage
+	cp -v "$squashfs_runtime" ./"${artifact%%-*}"-SQUASHFS.AppImage
 	cat ./squashfs >> ./SQUASHFS.AppImage
-	chmod +x ./SQUASHFS.AppImage
 	
 	# now dwarfs
 	set -- \
@@ -29,10 +28,25 @@ for artifact in ./*.AppImage; do
 		--header "$dwarfs_runtime" \
 		--input "$PWD"/AppDir
 
-	mkdwarfs "$@" -C zstd:level=22 -S26 -B6 --output ./DWARFS.AppImage
-	chmod +x ./DWARFS.AppImage
+	mkdwarfs "$@" -C zstd:level=22 -S26 -B6 --output ./"${artifact%%-*}"-DWARFS.AppImage
+	chmod +x ./*.AppImage
 done
 
+mkdir -p /tmp/test
+mv -v ./*-DWARFS.AppImage    /tmp/test
+mv -v ./*-SQUASHFS.AppImage  /tmp/test
+
+cd /tmp/test
+set -- ./*.AppImage
+for appimage do
+	count=0
+	while [ "$count" -lt 3 ]; do
+		echo "TESTING: $appimage"
+		bench-launch "$appimage"
+		count=$(( count + 1 ))
+		echo "===================="
+	done
+done
 
 mkdir -p ./dist
 echo "X-AppImage-Name=TEST"    >  ./dist/appinfo
