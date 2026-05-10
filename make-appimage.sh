@@ -44,7 +44,7 @@ for artifact in ./*.AppImage; do
 done
 
 /usr/bin/i3 &
-
+sleep 3
 mkdir -p /tmp/test
 mv -v ./*-DWARFS.AppImage    /tmp/test
 mv -v ./*-SQUASHFS.AppImage  /tmp/test
