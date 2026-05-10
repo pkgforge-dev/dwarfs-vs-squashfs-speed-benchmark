@@ -51,7 +51,7 @@ for appimage do
 	count=0
 	while [ "$count" -lt 3 ]; do
 		echo "TESTING: $appimage"
-		bench-launch "$appimage"
+		xvfb-run -a -- bench-launch "$appimage"
 		count=$(( count + 1 ))
 		echo "===================="
 	done
