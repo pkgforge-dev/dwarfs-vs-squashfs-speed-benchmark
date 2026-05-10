@@ -11,7 +11,7 @@ mkdir -p ./AppImages
 cd ./AppImages
 
 set -- \
-	https://github.com/pkgforge-dev/CollaboraOffice-AppImage/releases/download/25.04.9.2-1%402026-05-01_1777639060/Collabora_Office-25.04.9.2-1-anylinux-$ARCH.AppImage
+	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/Qt6+dbus-demo-onlysoftware-$ARCH.AppImage
 
 for appimage do
 	wget "$appimage"
@@ -43,6 +43,8 @@ for artifact in ./*.AppImage; do
 	chmod +x ./*.AppImage
 done
 
+xvfb-run -a -- /usr/bin/i3 &
+
 mkdir -p /tmp/test
 mv -v ./*-DWARFS.AppImage    /tmp/test
 mv -v ./*-SQUASHFS.AppImage  /tmp/test
@@ -54,7 +56,7 @@ for appimage do
 	while [ "$count" -lt 3 ]; do
 		echo 3 > /proc/sys/vm/drop_caches
 		echo "TESTING: $appimage"
-		xvfb-run -a -- bench-launch "$appimage"
+		bench-launch "$appimage"
 		count=$(( count + 1 ))
 		echo "===================="
 	done
