@@ -8,6 +8,9 @@ echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm xdotool
 
+cp -v ./bench-launch /usr/bin
+chmod +x /usr/bin/bench-launch
+
 wget https://github.com/mhx/dwarfs/releases/download/v0.15.3/dwarfs-universal-0.15.3-Linux-"$ARCH" -O /usr/bin/mkdwarfs
 chmod +x /usr/bin/mkdwarfs
 
