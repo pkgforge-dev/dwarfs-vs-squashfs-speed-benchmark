@@ -1,24 +1,41 @@
 #!/bin/sh
 
-set -eu
+set -e
 
 ARCH=$(uname -m)
-VERSION=$(pacman -Q PACKAGENAME | awk '{print $2; exit}') # example command to get version of application here
-export ARCH VERSION
-export OUTPATH=./dist
-export ADD_HOOKS="self-updater.hook"
-export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
-export ICON=PATH_OR_URL_TO_ICON
-export DESKTOP=PATH_OR_URL_TO_DESKTOP_ENTRY
 
-# Deploy dependencies
-quick-sharun /PATH/TO/BINARY_AND_LIBRARIES_HERE
+squashfs_runtime=$(command -v uruntime-appimage-squashfs-lite-"$ARCH")
+dwarfs_runtime=$(command -v uruntime-appimage-dwarfs-lite-"$ARCH")
 
-# Additional changes can be done in between here
+cd ./AppImages
+for artifact in ./*.AppImage; do
+	rm -rf ./AppDir ./squashfs-root ./squashfs
+	"$artifact" --appimage-extract
 
-# Turn AppDir into AppImage
-quick-sharun --make-appimage
+	# squashfs
+	mksquashfs ./AppDir ./squashfs -comp zstd -Xcompression-level 22 -b 1M
+	cp -v "$squashfs_runtime" ./SQUASHFS.AppImage
+	cat ./squashfs >> ./SQUASHFS.AppImage
+	chmod +x ./SQUASHFS.AppImage
+	
+	# now dwarfs
+	set -- \
+		--force \
+		--order=path \
+		--set-owner 0 \
+		--set-group 0 \
+		--no-history \
+		--no-create-timestamp \
+		--header "$dwarfs_runtime" \
+		--input "$PWD"/AppDir
 
-# Test the app for 12 seconds, if the test fails due to the app
-# having issues running in the CI use --simple-test instead
-quick-sharun --test ./dist/*.AppImage
+	mkdwarfs "$@" -C zstd:level=22 -S26 -B6 --output ./DWARFS.AppImage
+	chmod +x ./DWARFS.AppImage
+done
+
+
+mkdir -p ./dist
+echo "X-AppImage-Name=TEST"    >  ./dist/appinfo
+echo "X-AppImage-Version=TEST" >> ./dist/appinfo
+echo "X-AppImage-Arch=$ARCH"   >> ./dist/appinfo
+mv -v ./*.AppImage* ./dist
