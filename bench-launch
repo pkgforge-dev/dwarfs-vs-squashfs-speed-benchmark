@@ -5,10 +5,9 @@
 if [ ! -x "$(command -v "$1")" ]; then
 	>&2 echo "$1 is missing or does not have exec perms!"
 	exit 1
-elif [ -z "$CLASS" ]; then
-	>&2 echo "CLASS is not set"
-	exit 1
 fi
+
+OLD_CLASS=$(xdotool getactivewindow getwindowclassname) || :
 
 # Start the application and time
 $@ >/dev/null 2>&1 &
@@ -16,8 +15,8 @@ START=$(date +%s%N)
 
 # Loop until the window is found by xdotool
 while true; do
-	window_class=$(xdotool getactivewindow getwindowclassname)
-	if echo "$window_class" | grep -qi "$CLASS"; then
+	NEW_CLASS=$(xdotool getactivewindow getwindowclassname)
+	if [ "$NEW_CLASS" != "$OLD_CLASS" ]; then
 		break
 	fi
 	sleep 0.001
@@ -33,4 +32,3 @@ echo "Time taken: $TIME miliseconds"
 sleep 0.5
 
 killall "$1" 2>/dev/null
-
