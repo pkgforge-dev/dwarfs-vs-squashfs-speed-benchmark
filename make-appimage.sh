@@ -17,6 +17,8 @@ for appimage do
 	wget "$appimage"
 done
 
+chmod +x ./*.AppImage
+
 for artifact in ./*.AppImage; do
 	rm -rf ./AppDir ./squashfs-root ./squashfs
 	"$artifact" --appimage-extract
