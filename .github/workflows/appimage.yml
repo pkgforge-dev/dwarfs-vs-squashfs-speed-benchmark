@@ -31,4 +31,4 @@ jobs:
       - name: Install Dependencies
         run: /bin/sh ./get-dependencies.sh
       - name: Make AppImage
-        run: /bin/sh ./make-appimage.sh
+        run: xvfb-run -a -- /bin/sh ./make-appimage.sh
