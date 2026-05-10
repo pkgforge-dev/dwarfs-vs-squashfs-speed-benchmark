@@ -7,7 +7,16 @@ ARCH=$(uname -m)
 squashfs_runtime=$(command -v uruntime-appimage-squashfs-lite-"$ARCH")
 dwarfs_runtime=$(command -v uruntime-appimage-dwarfs-lite-"$ARCH")
 
+mkdir -p ./AppImages
 cd ./AppImages
+
+set -- \
+	https://github.com/pkgforge-dev/CollaboraOffice-AppImage/releases/download/25.04.9.2-1%402026-05-01_1777639060/Collabora_Office-25.04.9.2-1-anylinux-$ARCH.AppImage
+
+for appimage do
+	wget "$appimage"
+done
+
 for artifact in ./*.AppImage; do
 	rm -rf ./AppDir ./squashfs-root ./squashfs
 	"$artifact" --appimage-extract
