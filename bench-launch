@@ -15,7 +15,7 @@ START=$(date +%s%N)
 
 # Loop until the window is found by xdotool
 while true; do
-	NEW_CLASS=$(xdotool getactivewindow getwindowclassname)
+	NEW_CLASS=$(xdotool getactivewindow getwindowclassname 2>/dev/null)
 	if [ "$NEW_CLASS" != "$OLD_CLASS" ]; then
 		break
 	fi
