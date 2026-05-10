@@ -43,7 +43,7 @@ for artifact in ./*.AppImage; do
 	chmod +x ./*.AppImage
 done
 
-xvfb-run -a -- /usr/bin/i3 &
+/usr/bin/i3 &
 
 mkdir -p /tmp/test
 mv -v ./*-DWARFS.AppImage    /tmp/test
