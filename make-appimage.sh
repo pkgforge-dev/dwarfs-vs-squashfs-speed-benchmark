@@ -52,6 +52,7 @@ set -- ./*.AppImage
 for appimage do
 	count=0
 	while [ "$count" -lt 3 ]; do
+		echo 3 > /proc/sys/vm/drop_caches
 		echo "TESTING: $appimage"
 		xvfb-run -a -- bench-launch "$appimage"
 		count=$(( count + 1 ))
