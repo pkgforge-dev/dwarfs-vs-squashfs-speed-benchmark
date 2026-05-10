@@ -6,7 +6,7 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm xdotool fuse3
+pacman -Syu --noconfirm xdotool fuse3 i3-wm
 
 cp -v ./bench-launch /usr/bin
 chmod +x /usr/bin/bench-launch
