@@ -48,8 +48,3 @@ for appimage do
 	done
 done
 
-mkdir -p ./dist
-echo "X-AppImage-Name=TEST"    >  ./dist/appinfo
-echo "X-AppImage-Version=TEST" >> ./dist/appinfo
-echo "X-AppImage-Arch=$ARCH"   >> ./dist/appinfo
-mv -v ./*.AppImage* ./dist
