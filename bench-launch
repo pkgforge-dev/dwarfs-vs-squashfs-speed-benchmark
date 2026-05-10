@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# This script is used to determines the startup time of applications
+# It only works if your WM is configured to focus on new windows automatically
+if [ ! -x "$(command -v "$1")" ]; then
+	>&2 echo "$1 is missing or does not have exec perms!"
+	exit 1
+elif [ -z "$CLASS" ]; then
+	>&2 echo "CLASS is not set"
+	exit 1
+fi
+
+# Start the application and time
+$@ >/dev/null 2>&1 &
+START=$(date +%s%N)
+
+# Loop until the window is found by xdotool
+while true; do
+	window_class=$(xdotool getactivewindow getwindowclassname)
+	if echo "$window_class" | grep -qi "$CLASS"; then
+		break
+	fi
+	sleep 0.001
+done
+
+# END TIME
+END=$(date +%s%N)
+
+TIME=$((($END - $START) / 1000000))
+
+echo "Time taken: $TIME miliseconds"
+
+sleep 0.5
+
+killall "$1" 2>/dev/null
+
