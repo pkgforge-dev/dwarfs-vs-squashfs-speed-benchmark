@@ -17,7 +17,7 @@ mkdir -p ./AppImages
 cd ./AppImages
 
 set -- \
-	https://github.com/pkgforge-dev/CollaboraOffice-AppImage/releases/download/25.04.9.2-1%402026-05-01_1777639060/Collabora_Office-25.04.9.2-1-anylinux-"$ARCH".AppImage
+	https://github.com/mcarans/oolite/releases/download/1.93.0.7825-260511-0b5e81b/oolite-1.93.0.7825-260511-0b5e81b-"$ARCH".AppImage
 
 for appimage do
 	wget "$appimage"
