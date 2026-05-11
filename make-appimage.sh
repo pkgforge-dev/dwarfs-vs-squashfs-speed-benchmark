@@ -39,7 +39,7 @@ for artifact in ./*.AppImage; do
 		--header "$dwarfs_runtime" \
 		--input "$PWD"/AppDir
 
-	mkdwarfs "$@" -C zstd:level=22 -S26 --output ./"${artifact%%-*}"-DWARFS.AppImage
+	mkdwarfs "$@" -C zstd:level=22 -S25 -B4 --output ./"${artifact%%-*}"-DWARFS.AppImage
 	chmod +x ./*.AppImage
 done
 
