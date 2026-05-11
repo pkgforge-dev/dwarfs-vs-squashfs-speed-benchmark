@@ -6,6 +6,7 @@ set -e
 export ELECTRON_DISABLE_SANDBOX=1
 export WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS=1
 export QTWEBENGINE_DISABLE_SANDBOX=1
+export $(dbus-launch 2>/dev/null || echo 'NO_DBUS=1')
 
 
 ARCH=$(uname -m)
