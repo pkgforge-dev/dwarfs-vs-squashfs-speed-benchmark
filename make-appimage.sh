@@ -19,7 +19,7 @@ mkdir -p ./AppImages
 cd ./AppImages
 
 set -- \
-	https://github.com/pkgforge-dev/CollaboraOffice-AppImage/releases/download/25.04.9.2-1%402026-05-01_1777639060/Collabora_Office-25.04.9.2-1-anylinux-"$ARCH".AppImage
+	https://github.com/pkgforge-dev/GIMP-and-PhotoGIMP-AppImage/releases/download/3.2.4-1%402026-05-01_1777638235/GIMP-3.2.4-1-anylinux-"$ARCH".AppImage
 
 for appimage do
 	wget "$appimage"
