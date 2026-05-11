@@ -2,6 +2,12 @@
 
 set -e
 
+# CI containers often run as root which prevents some apps from working
+export ELECTRON_DISABLE_SANDBOX=1
+export WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS=1
+export QTWEBENGINE_DISABLE_SANDBOX=1
+
+
 ARCH=$(uname -m)
 
 squashfs_runtime=$(command -v uruntime-appimage-squashfs-lite-"$ARCH")
