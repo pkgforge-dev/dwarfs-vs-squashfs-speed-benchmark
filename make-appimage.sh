@@ -54,9 +54,9 @@ set -- ./*.AppImage
 for appimage do
 	count=0
 	echo "------------------------------------------------------------"
-	while [ "$count" -lt 3 ]; do
+	while [ "$count" -lt 5 ]; do
 		echo 3 > /proc/sys/vm/drop_caches
-		sleep 6
+		sleep 10
 		echo "TESTING: $appimage - $(du -h "$appimage")"
 		bench-launch "$appimage"
 		count=$(( count + 1 ))
