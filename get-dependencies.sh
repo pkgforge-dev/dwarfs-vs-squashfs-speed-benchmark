@@ -11,7 +11,7 @@ pacman -Syu --noconfirm xdotool fuse3 i3-wm
 cp -v ./bench-launch /usr/bin
 chmod +x /usr/bin/bench-launch
 
-wget https://github.com/Samueru-sama/appimagetool/releases/download/main/appimagetool-"$ARCH"-linux -O /usr/bin/appimagetool
+wget https://github.com/pkgforge-dev/appimagetool/releases/download/0.3.0/appimagetool-"$ARCH"-linux -O /usr/bin/appimagetool
 chmod +x /usr/bin/appimagetool
 
 wget https://github.com/mhx/dwarfs/releases/download/v0.15.3/dwarfs-universal-0.15.3-Linux-"$ARCH" -O /usr/bin/mkdwarfs
