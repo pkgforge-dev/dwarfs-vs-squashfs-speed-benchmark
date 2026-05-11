@@ -11,7 +11,7 @@ mkdir -p ./AppImages
 cd ./AppImages
 
 set -- \
-	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/Qt6+dbus-demo-onlysoftware-"$ARCH".AppImage
+	https://github.com/pkgforge-dev/Filelight-AppImage/releases/download/26.04.0-1%402026-05-01_1777638897/Filelight-26.04.0-1-anylinux-"$ARCH".AppImage
 
 for appimage do
 	wget "$appimage"
