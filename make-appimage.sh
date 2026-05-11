@@ -27,7 +27,7 @@ for artifact in ./*.AppImage; do
 	mksquashfs ./AppDir ./squashfs -comp zstd -Xcompression-level 22 -b 1M
 	cp -v "$squashfs_runtime" ./"${artifact%%-*}"-SQUASHFS.AppImage
 	cat ./squashfs >> ./"${artifact%%-*}"-SQUASHFS.AppImage
-	
+
 	# now dwarfs
 	appimagetool --name ./"${artifact%%-*}"-DWARFS.AppImage "$PWD"/AppDir
 	OPTIMIZE_LAUNCH=1 appimagetool --name ./"${artifact%%-*}"-optimized-DWARFS.AppImage "$PWD"/AppDir
@@ -57,3 +57,5 @@ for appimage do
 	echo "------------------------------------------------------------"
 done
 
+mkdir -p /tmp/dist
+mv -v ./*.AppImage /tmp/dist

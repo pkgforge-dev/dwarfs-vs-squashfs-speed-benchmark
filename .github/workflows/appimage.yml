@@ -32,3 +32,8 @@ jobs:
         run: /bin/sh ./get-dependencies.sh
       - name: Make AppImage
         run: xvfb-run -a -- /bin/sh ./make-appimage.sh
+      - name: Upload artifact
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: AppImage-${{ matrix.arch }}
+          path: /tmp/dist
