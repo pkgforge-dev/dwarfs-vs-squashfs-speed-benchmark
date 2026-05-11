@@ -11,9 +11,7 @@ mkdir -p ./AppImages
 cd ./AppImages
 
 set -- \
-	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/Qt6+dbus-demo-onlysoftware-"$ARCH".AppImage \
-	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/gtk4-demo-onlysoftware-"$ARCH".AppImage \
-	https://github.com/pkgforge-dev/Filelight-AppImage/releases/download/26.04.0-1%402026-05-01_1777638897/Filelight-26.04.0-1-anylinux-"$ARCH".AppImage
+	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/Qt6+dbus-demo-onlysoftware-"$ARCH".AppImage
 
 for appimage do
 	wget "$appimage"
@@ -41,7 +39,7 @@ for artifact in ./*.AppImage; do
 		--header "$dwarfs_runtime" \
 		--input "$PWD"/AppDir
 
-	mkdwarfs "$@" -C zstd:level=22 -S26 -B6 --output ./"${artifact%%-*}"-DWARFS.AppImage
+	mkdwarfs "$@" -C zstd:level=22 -S26 --output ./"${artifact%%-*}"-DWARFS.AppImage
 	chmod +x ./*.AppImage
 done
 
