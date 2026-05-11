@@ -11,7 +11,7 @@ mkdir -p ./AppImages
 cd ./AppImages
 
 set -- \
-	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/Qt6+dbus-demo-onlysoftware-$ARCH.AppImage
+	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/Qt6+dbus-demo-onlysoftware-$ARCH.AppImage \
 	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/gtk4-demo-onlysoftware-$ARCH.AppImage
 
 for appimage do
