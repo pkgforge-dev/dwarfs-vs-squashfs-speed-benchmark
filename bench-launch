@@ -29,6 +29,6 @@ TIME=$((($END - $START) / 1000000))
 
 echo "Time taken: $TIME miliseconds"
 
-sleep 0.5
+sleep 6
 
 killall "$1" 2>/dev/null
