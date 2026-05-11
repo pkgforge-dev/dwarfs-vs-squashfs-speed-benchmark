@@ -9,6 +9,7 @@ export QTWEBENGINE_DISABLE_SANDBOX=1
 export $(dbus-launch 2>/dev/null || echo 'NO_DBUS=1')
 export USER="${LOGNAME:-${USER:-${USERNAME:-yomama}}}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp}"
+export DISABLE_AUTO_UPDATES=1
 
 ARCH=$(uname -m)
 
