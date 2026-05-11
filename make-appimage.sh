@@ -31,6 +31,7 @@ for artifact in ./*.AppImage; do
 	# now dwarfs
 	set -- \
 		--force \
+		--order=path \
 		--set-owner 0 \
 		--set-group 0 \
 		--no-history \
