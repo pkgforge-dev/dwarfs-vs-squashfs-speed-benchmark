@@ -13,8 +13,7 @@ cd ./AppImages
 set -- \
 	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/Qt6+dbus-demo-onlysoftware-"$ARCH".AppImage \
 	https://github.com/pkgforge-dev/Anylinux-AppImages/releases/download/demo/gtk4-demo-onlysoftware-"$ARCH".AppImage \
-	https://github.com/pkgforge-dev/Filelight-AppImage/releases/download/26.04.0-1%402026-05-01_1777638897/Filelight-26.04.0-1-anylinux-"$ARCH".AppImage \
-	https://github.com/pkgforge-dev/CollaboraOffice-AppImage/releases/download/25.04.9.2-1%402026-05-01_1777639060/Collabora_Office-25.04.9.2-1-anylinux-"$ARCH".AppImage
+	https://github.com/pkgforge-dev/Filelight-AppImage/releases/download/26.04.0-1%402026-05-01_1777638897/Filelight-26.04.0-1-anylinux-"$ARCH".AppImage
 
 for appimage do
 	wget "$appimage"
@@ -56,6 +55,7 @@ cd /tmp/test
 set -- ./*.AppImage
 for appimage do
 	count=0
+	echo "------------------------------------------------------------"
 	while [ "$count" -lt 3 ]; do
 		echo 3 > /proc/sys/vm/drop_caches
 		sleep 1
@@ -64,5 +64,6 @@ for appimage do
 		count=$(( count + 1 ))
 		echo "===================="
 	done
+	echo "------------------------------------------------------------"
 done
 
