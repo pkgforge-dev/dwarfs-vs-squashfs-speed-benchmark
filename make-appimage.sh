@@ -29,17 +29,9 @@ for artifact in ./*.AppImage; do
 	cat ./squashfs >> ./"${artifact%%-*}"-SQUASHFS.AppImage
 	
 	# now dwarfs
-	set -- \
-		--force \
-		--order=path \
-		--set-owner 0 \
-		--set-group 0 \
-		--no-history \
-		--no-create-timestamp \
-		--header "$dwarfs_runtime" \
-		--input "$PWD"/AppDir
+	appimagetool --name ./"${artifact%%-*}"-DWARFS.AppImage "$PWD"/AppDir
+	OPTIMIZE_LAUNCH=1 appimagetool --name ./"${artifact%%-*}"-optimized-DWARFS.AppImage "$PWD"/AppDir
 
-	mkdwarfs "$@" -C zstd:level=22 -S26 -B6 --output ./"${artifact%%-*}"-DWARFS.AppImage
 	chmod +x ./*.AppImage
 done
 
