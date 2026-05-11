@@ -7,7 +7,7 @@ if [ ! -x "$(command -v "$1")" ]; then
 	exit 1
 fi
 
-OLD_CLASS=$(xdotool getactivewindow getwindowclassname) || :
+OLD_CLASS=$(xdotool getactivewindow getwindowclassname 2>/dev/null) || :
 
 # Start the application and time
 $@ >/dev/null 2>&1 &
