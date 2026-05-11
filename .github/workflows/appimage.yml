@@ -23,7 +23,7 @@ jobs:
             arch: aarch64
     container:
       image: ghcr.io/pkgforge-dev/archlinux:latest
-      options: --privileged --device /dev/fuse
+      options: --privileged --device /dev/fuse --cap-add SYS_ADMIN
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Preparing Container
