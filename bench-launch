@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# CI containers often run as root which prevents some apps from working
+export ELECTRON_DISABLE_SANDBOX=1
+export WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS=1
+export QTWEBENGINE_DISABLE_SANDBOX=1
+
 # This script is used to determines the startup time of applications
 # It only works if your WM is configured to focus on new windows automatically
 if [ ! -x "$(command -v "$1")" ]; then
